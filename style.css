@@ -7,14 +7,14 @@ body {
 }
 
 .calc {
-    height: 570px;
+    height: 640px;
     width: 400px;
     background-color: grey;
     border-radius: 20px;
 }
 
 .display {
-    height: 160px;
+    height: 140px;
     width: 360px;
     margin: 20px;
     background-color: lightgray;
@@ -36,4 +36,10 @@ button {
     width: 80px;
     background-color: white;
     border-radius: 10px;
+    font-size: 30px;
+}
+
+.bclear, .bdelete {
+    height: 80px;
+    width: 175px;
 }
