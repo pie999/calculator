@@ -14,11 +14,17 @@ body {
 }
 
 .display {
-    height: 140px;
-    width: 360px;
+    height: 116px;
+    width: 336px;
     margin: 20px;
     background-color: lightgray;
+    border: 2px solid black;
     border-radius: 10px;
+    font-size: 50px;
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
+    padding: 10px;
 }
 
 .butt-grid {
