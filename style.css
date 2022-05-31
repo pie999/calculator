@@ -1,0 +1,39 @@
+body {
+    min-height: 100vh;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calc {
+    height: 570px;
+    width: 400px;
+    background-color: grey;
+    border-radius: 20px;
+}
+
+.display {
+    height: 160px;
+    width: 360px;
+    margin: 20px;
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+.butt-grid {
+    margin: 10px;
+}
+
+.row {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+button {
+    height: 80px;
+    width: 80px;
+    background-color: white;
+    border-radius: 10px;
+}
