@@ -47,6 +47,8 @@ function doOperation(){
         console.log("n1 is: " + n1);
         console.log("n2 is: " + n2);
         result = operate(history[operatorIndex], n1, n2);
+        if (result != "ERROR")
+            result = Math.round(result * 100) / 100;
         console.log("result: " + result);
     }
     else
@@ -69,6 +71,7 @@ numberButtons.forEach((numberButton) => {
         history.push(numberButton.textContent);
         display.textContent += numberButton.textContent;
         operatorButtons.forEach(button => button.disabled = false);
+        equalButton.disabled = false;
     });
 });
 
@@ -84,6 +87,7 @@ operatorButtons.forEach(button => button.disabled = true);
 operatorButtons.forEach((operatorButton) => {
     operatorButton.addEventListener("click", () => {
         dotButton.disabled = false;
+        equalButton.disabled = true;
         if (checkOperator()){
             display.textContent = doOperation();
             if (display.textContent != "ERROR")
@@ -99,11 +103,14 @@ operatorButtons.forEach((operatorButton) => {
 });
 
 const equalButton = document.querySelector(".beq");
+equalButton.disabled = true;
 equalButton.addEventListener("click", () => display.textContent = doOperation());
 
 const clearButton = document.querySelector(".bclear");
 clearButton.addEventListener("click", () => {
     buttons.forEach(button => button.disabled = false);
+    operatorButtons.forEach(button => button.disabled = true);
+    equalButton.disabled = true;
     history = [];
     display.textContent = "";
 });
@@ -111,11 +118,17 @@ clearButton.addEventListener("click", () => {
 const deleteButton = document.querySelector(".bdelete");
 deleteButton.addEventListener("click", () => {
     let lastChar = history.pop();
-    if (lastChar == "."){
-        dotButton.disabled = false;
+    if (history.length == 0){
+        operatorButtons.forEach(button => button.disabled = true);
+        equalButton.disabled = true;
     }
-    else if (lastChar == "+" || lastChar == "-" || lastChar == "x" || lastChar == "÷"){
-        operatorButtons.forEach(button => button.disabled = false);
+    else{
+        if (lastChar == "."){
+            dotButton.disabled = false;
+        }
+        else if (lastChar == "+" || lastChar == "-" || lastChar == "x" || lastChar == "÷"){
+            operatorButtons.forEach(button => button.disabled = false);
+        }
     }
     display.textContent = display.textContent.slice(0, -1);
 });

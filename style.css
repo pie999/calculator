@@ -2,6 +2,7 @@ body {
     min-height: 100vh;
     margin: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: rgb(255, 241, 224);
@@ -13,7 +14,7 @@ body {
     background-color: rgb(255, 185, 93);
     border: 3px solid black;
     border-radius: 20px;
-    box-shadow: 3px 3px 10px rgb(151, 98, 0);
+    box-shadow: 5px 5px 15px rgb(151, 98, 0);
 }
 
 .display {
@@ -21,7 +22,7 @@ body {
     overflow: hidden;
     height: 116px;
     margin: 20px;
-    background-color: rgb(255, 241, 224);
+    background-color: rgb(255, 255, 255);
     border: 2px solid black;
     border-radius: 10px;
     font-family: 'Source Code Pro', monospace;
@@ -64,4 +65,10 @@ button:active {
 .bclear, .bdelete {
     height: 80px;
     width: 175px;
+}
+
+a {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 30px;
+    color: black;
 }
