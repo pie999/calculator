@@ -8,7 +8,16 @@ function multiply(a, b){
     return a * b;
 }
 function divide(a, b){
-    return a / b;
+    if (b != 0)
+        return Math.round((a / b) * 100) / 100;
+    else 
+        return error();
+}
+
+function error() {
+    buttons.forEach(button => button.disabled = true);
+    clearButton.disabled = false;
+    return "ERROR";
 }
 
 function operate(op, a, b){
@@ -41,7 +50,7 @@ function doOperation(){
         console.log("result: " + result);
     }
     else
-        return "ERROR"
+        return error();
     history = [...result.toString()];
     console.table(history);
     return result;
@@ -52,6 +61,7 @@ function doOperation(){
 let history = [];
 let operatorIndex = undefined;
 const display = document.querySelector(".display");
+const buttons = document.querySelectorAll("button");
 
 const numberButtons = document.querySelectorAll(".bn");
 numberButtons.forEach((numberButton) => {
@@ -61,7 +71,14 @@ numberButtons.forEach((numberButton) => {
     });
 });
 
-const operatorButtons = document.querySelectorAll(".bop")
+const dotButton = document.querySelector(".bdot");
+dotButton.addEventListener("click", () => {
+    history.push(".");
+    display.textContent += ".";
+    dotButton.disabled = true;
+});
+
+const operatorButtons = document.querySelectorAll(".bop");
 operatorButtons.forEach((operatorButton) => {
     operatorButton.addEventListener("click", () => {
         if (checkOperator()){
@@ -72,9 +89,22 @@ operatorButtons.forEach((operatorButton) => {
             history.push(operatorButton.textContent);
             display.textContent += operatorButton.textContent;
         }
+        dotButton.disabled = false;
     });
 });
 
-const equalButton = document.querySelector(".beq")
+const equalButton = document.querySelector(".beq");
 equalButton.addEventListener("click", () => display.textContent = doOperation());
 
+const clearButton = document.querySelector(".bclear");
+clearButton.addEventListener("click", () => {
+    buttons.forEach(button => button.disabled = false);
+    history = [];
+    display.textContent = "";
+});
+
+const deleteButton = document.querySelector(".bdelete");
+deleteButton.addEventListener("click", () => {
+    history.pop();
+    display.textContent = display.textContent.slice(0, -1);
+});

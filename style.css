@@ -14,8 +14,9 @@ body {
 }
 
 .display {
+    inline-size: 336px;
+    overflow: hidden;
     height: 116px;
-    width: 336px;
     margin: 20px;
     background-color: lightgray;
     border: 2px solid black;
