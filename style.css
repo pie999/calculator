@@ -1,16 +1,19 @@
 body {
     min-height: 100vh;
-    background-color: antiquewhite;
+    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgb(255, 241, 224);
 }
 
 .calc {
     height: 640px;
     width: 400px;
-    background-color: grey;
+    background-color: rgb(255, 185, 93);
+    border: 3px solid black;
     border-radius: 20px;
+    box-shadow: 3px 3px 10px rgb(151, 98, 0);
 }
 
 .display {
@@ -18,14 +21,16 @@ body {
     overflow: hidden;
     height: 116px;
     margin: 20px;
-    background-color: lightgray;
+    background-color: rgb(255, 241, 224);
     border: 2px solid black;
     border-radius: 10px;
+    font-family: 'Source Code Pro', monospace;
     font-size: 50px;
     display: flex;
     justify-content: end;
     align-items: flex-end;
     padding: 10px;
+    box-shadow: 1px 1px 10px rgb(151, 98, 0);
 }
 
 .butt-grid {
@@ -41,9 +46,19 @@ body {
 button {
     height: 80px;
     width: 80px;
-    background-color: white;
+    background-color: rgb(247, 227, 199);
     border-radius: 10px;
+    font-family: 'Source Code Pro', monospace;
     font-size: 30px;
+    box-shadow: 3px 3px 10px rgb(151, 98, 0);
+}
+
+button:hover {
+    background-color: rgb(243, 205, 152);
+}
+
+button:active {
+    transform: scale(0.97);
 }
 
 .bclear, .bdelete {

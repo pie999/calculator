@@ -68,6 +68,7 @@ numberButtons.forEach((numberButton) => {
     numberButton.addEventListener("click", () => {
         history.push(numberButton.textContent);
         display.textContent += numberButton.textContent;
+        operatorButtons.forEach(button => button.disabled = false);
     });
 });
 
@@ -79,17 +80,21 @@ dotButton.addEventListener("click", () => {
 });
 
 const operatorButtons = document.querySelectorAll(".bop");
+operatorButtons.forEach(button => button.disabled = true);
 operatorButtons.forEach((operatorButton) => {
     operatorButton.addEventListener("click", () => {
+        dotButton.disabled = false;
         if (checkOperator()){
-            display.textContent = doOperation() + operatorButton.textContent;
+            display.textContent = doOperation();
+            if (display.textContent != "ERROR")
+                display.textContent += operatorButton.textContent;
             history.push(operatorButton.textContent); //put after because history is overwritten with doOpeartion()
         }
         else {
             history.push(operatorButton.textContent);
             display.textContent += operatorButton.textContent;
         }
-        dotButton.disabled = false;
+        operatorButtons.forEach(button => button.disabled = true);
     });
 });
 
@@ -105,6 +110,12 @@ clearButton.addEventListener("click", () => {
 
 const deleteButton = document.querySelector(".bdelete");
 deleteButton.addEventListener("click", () => {
-    history.pop();
+    let lastChar = history.pop();
+    if (lastChar == "."){
+        dotButton.disabled = false;
+    }
+    else if (lastChar == "+" || lastChar == "-" || lastChar == "x" || lastChar == "÷"){
+        operatorButtons.forEach(button => button.disabled = false);
+    }
     display.textContent = display.textContent.slice(0, -1);
 });
