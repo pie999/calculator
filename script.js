@@ -18,28 +18,63 @@ function operate(op, a, b){
     else if (op == "÷") return divide(a, b);
 }
 
-const display = document.querySelector(".display");
-const buttons = document.querySelectorAll("button");
-let history = [];
-buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-        history.push(button.textContent);
-        display.textContent += button.textContent;
-        if (history[history.length - 1] == "=")
-            display.textContent = doOperation();
-    });
-});
-
-function doOperation (){
+function checkOperator(){
+    console.table(history);
+    operatorIndex = undefined;
     history.forEach((char, i) => {
         if (char == "+" || char == "-" || char == "x" || char == "÷"){
-            console.table(history);
-            let n1 = history.slice(0, i).join("");
-            let n2 = history.slice(i+1, -1).join("");
-            result = operate(history[i], n1, n2);
+            console.log(`operator found: ${char}`);
+            operatorIndex = i;
         }
     });
+    return operatorIndex;
+}
+
+function doOperation(){
+    if (checkOperator()){
+        console.log("operator index: " + operatorIndex);
+        let n1 = history.slice(0, operatorIndex).join("");
+        let n2 = history.slice(operatorIndex + 1).join("");
+        console.log("n1 is: " + n1);
+        console.log("n2 is: " + n2);
+        result = operate(history[operatorIndex], n1, n2);
+        console.log("result: " + result);
+    }
+    else
+        return "ERROR"
     history = [...result.toString()];
     console.table(history);
     return result;
 }
+
+
+
+let history = [];
+let operatorIndex = undefined;
+const display = document.querySelector(".display");
+
+const numberButtons = document.querySelectorAll(".bn");
+numberButtons.forEach((numberButton) => {
+    numberButton.addEventListener("click", () => {
+        history.push(numberButton.textContent);
+        display.textContent += numberButton.textContent;
+    });
+});
+
+const operatorButtons = document.querySelectorAll(".bop")
+operatorButtons.forEach((operatorButton) => {
+    operatorButton.addEventListener("click", () => {
+        if (checkOperator()){
+            display.textContent = doOperation() + operatorButton.textContent;
+            history.push(operatorButton.textContent); //put after because history is overwritten with doOpeartion()
+        }
+        else {
+            history.push(operatorButton.textContent);
+            display.textContent += operatorButton.textContent;
+        }
+    });
+});
+
+const equalButton = document.querySelector(".beq")
+equalButton.addEventListener("click", () => display.textContent = doOperation());
+
