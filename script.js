@@ -1,5 +1,5 @@
 function add(a, b){
-    return a + b;
+    return +a + +b;
 }
 function subtract(a, b){
     return a - b;
@@ -12,15 +12,15 @@ function divide(a, b){
 }
 
 function operate(op, a, b){
-    if (op == "+") add(a, b);
-    else if (op == "-") subtract(a, b);
-    else if (op == "*") multiply(a, b);
-    else if (op == "/") divide(a, b);
+    if (op == "+") return add(a, b);
+    else if (op == "-") return subtract(a, b);
+    else if (op == "x") return multiply(a, b);
+    else if (op == "÷") return divide(a, b);
 }
 
 const display = document.querySelector(".display");
 const buttons = document.querySelectorAll("button");
-const history = [];
+let history = [];
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
         history.push(button.textContent);
@@ -32,12 +32,14 @@ buttons.forEach((button) => {
 
 function doOperation (){
     history.forEach((char, i) => {
-        if (char == "+"){
+        if (char == "+" || char == "-" || char == "x" || char == "÷"){
             console.table(history);
             let n1 = history.slice(0, i).join("");
             let n2 = history.slice(i+1, -1).join("");
-            result = +n1 + +n2;
+            result = operate(history[i], n1, n2);
         }
     });
+    history = [...result.toString()];
+    console.table(history);
     return result;
 }
